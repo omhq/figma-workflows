@@ -1,0 +1,273 @@
+[
+  {
+    "category": "Properties",
+    "items": [
+      {
+        "prettyName": "Set layer name",
+        "name": "BaseNode",
+        "icon": "Selection",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "name",
+              "type": "string",
+              "name": "value",
+              "label": "",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Set opacity",
+        "name": "BlendMixin",
+        "icon": "Drop",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "opacity",
+              "type": "number",
+              "name": "value",
+              "message": "A decimal less than of equal to 1.",
+              "label": "",
+              "defaultValue": "50 / 100",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Blend mode",
+        "name": "BlendMixin",
+        "icon": "Drop",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "blendMode",
+              "type": "select",
+              "name": "value",
+              "label": "Value",
+              "required": true,
+              "options": [
+                {
+                  "label": "Pass through",
+                  "value": "PASS_THROUGH"
+                },
+                {
+                  "label": "Normal",
+                  "value": "NORMAL"
+                },
+                {
+                  "label": "Darken",
+                  "value": "DARKEN"
+                },
+                {
+                  "label": "Multiply",
+                  "value": "MULTIPLY"
+                },
+                {
+                  "label": "Linear burn",
+                  "value": "LINEAR_BURN"
+                },
+                {
+                  "label": "Color burn",
+                  "value": "COLOR_BURN"
+                },
+                {
+                  "label": "Lighten",
+                  "value": "LIGHTEN"
+                },
+                {
+                  "label": "Screen",
+                  "value": "SCREEN"
+                },
+                {
+                  "label": "Linear dodge",
+                  "value": "LINEAR_DODGE"
+                },
+                {
+                  "label": "Color dodge",
+                  "value": "COLOR_DODGE"
+                },
+                {
+                  "label": "Overlay",
+                  "value": "OVERLAY"
+                },
+                {
+                  "label": "Soft light",
+                  "value": "SOFT_LIGHT"
+                },
+                {
+                  "label": "Hard light",
+                  "value": "HARD_LIGHT"
+                },
+                {
+                  "label": "Difference",
+                  "value": "DIFFERENCE"
+                },
+                {
+                  "label": "Exclusion",
+                  "value": "EXCLUSION"
+                },
+                {
+                  "label": "Hue",
+                  "value": "HUE"
+                },
+                {
+                  "label": "Saturation",
+                  "value": "SATURATION"
+                },
+                {
+                  "label": "Color",
+                  "value": "COLOR"
+                },
+                {
+                  "label": "Luminosity",
+                  "value": "LUMINOSITY"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Corner radius",
+        "name": "CornerMixin",
+        "icon": "Corners",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "cornerRadius",
+              "type": "number",
+              "name": "value",
+              "message": "",
+              "label": "",
+              "defaultValue": "",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Corner smoothing",
+        "name": "CornerMixin",
+        "icon": "Corners",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "cornerSmoothing",
+              "type": "number",
+              "name": "value",
+              "message": "A decimal less than of equal to 1.",
+              "label": "",
+              "defaultValue": "50 / 100",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Rectangle Frame corners",
+        "name": "CornerMixin",
+        "icon": "Corners",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "type": "number",
+              "name": "topLeftRadius",
+              "label": "Top left",
+              "required": false,
+              "defaultValue": "",
+              "operator": "topLeftRadius"
+            },
+            {
+              "type": "number",
+              "name": "topRightRadius",
+              "label": "Top right",
+              "required": false,
+              "defaultValue": "",
+              "operator": "topRightRadius"
+            },
+            {
+              "type": "number",
+              "name": "bottomLeftRadius",
+              "label": "Bottom left",
+              "required": false,
+              "defaultValue": "",
+              "operator": "bottomLeftRadius"
+            },
+            {
+              "type": "number",
+              "name": "bottomRightRadius",
+              "label": "Bottom right",
+              "required": false,
+              "defaultValue": "",
+              "operator": "bottomRightRadius"
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Stroke miter limit",
+        "name": "GeometryMixin",
+        "icon": "Group",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "strokeMiterLimit",
+              "type": "number",
+              "name": "value",
+              "message": "",
+              "label": "",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Set point count",
+        "name": "StarNode",
+        "icon": "Star",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "pointCount",
+              "type": "number",
+              "name": "value",
+              "message": "",
+              "label": "",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Inner radius",
+        "name": "StarNode",
+        "icon": "Star",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "innerRadius",
+              "type": "number",
+              "name": "value",
+              "message": "A decimal less than of equal to 1.",
+              "label": "",
+              "defaultValue": "50 / 100",
+              "required": true
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

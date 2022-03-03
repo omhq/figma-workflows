@@ -1,0 +1,38 @@
+{
+  "extends": [
+    "standard",
+    "standard-react"
+  ],
+  "plugins": [
+    "jsx-a11y",
+    "react",
+    "react-hooks"
+  ],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/prefer-default-export": 0,
+    "jsx-a11y/href-no-hash": [0],
+    "react/prop-types": [0],
+    "arrow-parens": 0,
+    "react/destructuring-assignment": 0,
+    "comma-dangle" : 1,
+    "react/react-in-jsx-scope": 0,
+    "space-before-function-paren": 0,
+    "jsx-quotes": 0,
+    "camelcase": 0,
+    "react/self-closing-comp": 0,
+    "react/jsx-handler-names": 0,
+    "react/jsx-curly-newline": 0,
+    "react/jsx-indent": 0
+  },
+  "globals": {
+    "window": true,
+    "document": true,
+    "localStorage": true,
+    "fetch": true,
+    "parent": true,
+    "figma": true,
+    "__html__": true,
+    "AbortController": true
+  }
+}

@@ -1,0 +1,138 @@
+[
+  {
+    "category": "Layer",
+    "items": [
+      {
+        "prettyName": "Get current selection",
+        "name": "BaseNode",
+        "icon": "Selection",
+        "data": {
+          "operator": "selection-current"
+        }
+      },
+      {
+        "prettyName": "Create layer",
+        "name": "BaseNode",
+        "icon": "Group",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "create",
+              "type": "select",
+              "name": "value",
+              "label": "Type",
+              "required": true,
+              "options": [
+                {
+                  "label": "Rectangle",
+                  "value": "rectangle"
+                },
+                {
+                  "label": "Line",
+                  "value": "line"
+                },
+                {
+                  "label": "Ellipse",
+                  "value": "ellipse"
+                },
+                {
+                  "label": "Polygon",
+                  "value": "polygon"
+                },
+                {
+                  "label": "Star",
+                  "value": "star"
+                },
+                {
+                  "label": "Text",
+                  "value": "text"
+                },
+                {
+                  "label": "Frame",
+                  "value": "frame"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Delete layer",
+        "name": "BaseNode",
+        "icon": "TrashIcon",
+        "data": {
+          "operator": "remove"
+        }
+      },
+      {
+        "prettyName": "Expanded",
+        "name": "ContainerMixin",
+        "icon": "Group",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "expanded",
+              "type": "boolean",
+              "name": "expanded",
+              "label": "",
+              "default": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Set mask",
+        "name": "BlendMixin",
+        "icon": "Mask",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "isMask",
+              "type": "boolean",
+              "name": "isMask",
+              "label": "Is mask",
+              "default": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Set visibility",
+        "name": "SceneNodeMixin",
+        "icon": "Eye",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "visible",
+              "type": "boolean",
+              "name": "visible",
+              "label": "",
+              "default": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Set locked",
+        "name": "SceneNodeMixin",
+        "icon": "Lock",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "locked",
+              "type": "boolean",
+              "name": "locked",
+              "label": "",
+              "default": true
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

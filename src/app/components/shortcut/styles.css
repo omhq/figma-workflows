@@ -1,0 +1,36 @@
+[data-dnd-hide="true"] {
+  display: none;
+}
+
+[data-dnd-show="false"] {
+  display: none;
+}
+
+.sortable-chosen {
+  background: none;
+}
+
+.sortable-drag {
+  background: none;
+  padding: 0;
+}
+
+.ghost {
+  padding: 2px 0;
+  background: #F3F4F6;
+  border-radius: 10px;
+}
+
+.sortable-drag .emptyChildren:before,
+.ghost .emptyChildren:before {
+  content: "";
+  padding: 0;
+}
+
+.emptyChildren:before {
+  content: "drop actions here to nest";
+  padding: 6px 10px;
+  font-size: 13px;
+  display: block;
+  color: #777;
+}

@@ -1,0 +1,148 @@
+[
+  {
+    "category": "Scripting",
+    "items": [
+      {
+        "prettyName": "For each",
+        "name": "BaseNode",
+        "icon": "RefreshIcon",
+        "data": {
+          "operator": "loop"
+        }
+      },
+      {
+        "prettyName": "If",
+        "name": "BaseNode",
+        "icon": "CodeIcon",
+        "data": {
+          "operator": "if",
+          "args": [
+            {
+              "type": "if",
+              "name": "if",
+              "label": "If",
+              "helper": "",
+              "required": true,
+              "args": [
+                {
+                  "type": "string",
+                  "name": "property",
+                  "label": "",
+                  "message": "",
+                  "required": false
+                },
+                {
+                  "type": "select",
+                  "name": "operator",
+                  "label": "Operator",
+                  "options": [
+                    {
+                      "label": "==",
+                      "value": "equal"
+                    },
+                    {
+                      "label": "!=",
+                      "value": "not-equal"
+                    },
+                    {
+                      "label": "===",
+                      "value": "strict-equal"
+                    },
+                    {
+                      "label": "!==",
+                      "value": "strict-not-equal"
+                    },
+                    {
+                      "label": ">",
+                      "value": "greater-than"
+                    },
+                    {
+                      "label": ">=",
+                      "value": "greater-than-or-equal"
+                    },
+                    {
+                      "label": "<",
+                      "value": "less-than"
+                    },
+                    {
+                      "label": "<=",
+                      "value": "less-than-or-equal"
+                    }
+                  ],
+                  "required": true
+                },
+                {
+                  "type": "string",
+                  "name": "value",
+                  "label": "",
+                  "message": "",
+                  "required": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Else",
+        "name": "BaseNode",
+        "icon": "CodeIcon",
+        "hidden": true,
+        "data": {
+          "operator": "else"
+        }
+      },
+      {
+        "prettyName": "Repeat",
+        "name": "BaseNode",
+        "icon": "RefreshIcon",
+        "data": {
+          "operator": "repeat",
+          "args": [
+            {
+              "type": "text",
+              "name": "value",
+              "label": "",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Run script",
+        "name": "Code",
+        "icon": "CodeIcon",
+        "data": {
+          "api": "custom",
+          "args": [
+            {
+              "operator": "code",
+              "type": "code",
+              "name": "value",
+              "label": "",
+              "default": "// data passed in\n// console.log(input)\n\n// http response if its passed in\n// console.log(httpResponse)\n\n// figma context\n// const newNode = figma.createRectangle()\n\n// operate on the new node\n// newNode.resize(300, 200)\n\n// override the default return\n// return newNode",
+              "required": false
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "HTTP Request",
+        "name": "HttpRequest",
+        "icon": "GlobeIcon",
+        "data": {
+          "api": "custom",
+          "args": [
+            {
+              "operator": "httprequest",
+              "type": "httprequest",
+              "name": "value",
+              "label": "URL",
+              "required": true
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

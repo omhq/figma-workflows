@@ -1,0 +1,702 @@
+[
+  {
+    "category": "Text",
+    "items": [
+      {
+        "prettyName": "Horizontal alignment",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "args": [
+            {
+              "operator": "textAlignHorizontal",
+              "type": "select",
+              "name": "value",
+              "label": "",
+              "required": true,
+              "options": [
+                {
+                  "label": "Left",
+                  "value": "LEFT"
+                },
+                {
+                  "label": "Center",
+                  "value": "CENTER"
+                },
+                {
+                  "label": "Right",
+                  "value": "RIGHT"
+                },
+                {
+                  "label": "Justify",
+                  "value": "JUSTIFIED"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Vertical alignment",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "args": [
+            {
+              "operator": "textAlignVertical",
+              "type": "select",
+              "name": "value",
+              "label": "",
+              "required": true,
+              "options": [
+                {
+                  "label": "Top",
+                  "value": "TOP"
+                },
+                {
+                  "label": "Center",
+                  "value": "CENTER"
+                },
+                {
+                  "label": "Bottom",
+                  "value": "BOTTOM"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Auto resize",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "args": [
+            {
+              "operator": "textAutoResize",
+              "type": "select",
+              "name": "value",
+              "label": "",
+              "required": true,
+              "options": [
+                {
+                  "label": "None",
+                  "value": "NONE"
+                },
+                {
+                  "label": "width and height",
+                  "value": "WIDTH_AND_HEIGHT"
+                },
+                {
+                  "label": "height",
+                  "value": "HEIGHT"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Paragraph indent",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "args": [
+            {
+              "operator": "paragraphIndent",
+              "type": "number",
+              "name": "value",
+              "message": "",
+              "label": "Value"
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Paragraph spacing",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "args": [
+            {
+              "operator": "paragraphSpacing",
+              "type": "number",
+              "name": "value",
+              "message": "",
+              "label": "Value"
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Auto rename",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "autoRename",
+              "type": "boolean",
+              "name": "value",
+              "label": "",
+              "default": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Font size",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "args": [
+            {
+              "operator": "fontSize",
+              "type": "number",
+              "minimum": 1,
+              "name": "fontsize",
+              "label": "Size",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Case",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "args": [
+            {
+              "operator": "textCase",
+              "type": "select",
+              "name": "value",
+              "label": "",
+              "required": true,
+              "options": [
+                {
+                  "label": "Original",
+                  "value": "ORIGINAL"
+                },
+                {
+                  "label": "Uppercase",
+                  "value": "UPPER"
+                },
+                {
+                  "label": "Lowercase",
+                  "value": "LOWER"
+                },
+                {
+                  "label": "Title Case",
+                  "value": "TITLE"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Decorate",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "args": [
+            {
+              "type": "select",
+              "name": "value",
+              "label": "",
+              "operator": "textDecoration",
+              "required": true,
+              "options": [
+                {
+                  "label": "none",
+                  "value": "NONE"
+                },
+                {
+                  "label": "Underline",
+                  "value": "UNDERLINE"
+                },
+                {
+                  "label": "Strikethrough",
+                  "value": "STRIKETHROUGH"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Letter spacing",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "args": [
+            {
+              "type": "letterSpacing",
+              "name": "letterspacing",
+              "label": "Letter spacing",
+              "operator": "letterSpacing",
+              "helper": "Set letter spacing in percentages or pixels.",
+              "required": true,
+              "args": [
+                {
+                  "type": "number",
+                  "name": "value",
+                  "label": "Value"
+                },
+                {
+                  "type": "select",
+                  "name": "unit",
+                  "label": "Pixels or percent",
+                  "options": [
+                    {
+                      "label": "Pixels",
+                      "value": "PIXELS"
+                    },
+                    {
+                      "label": "Percent",
+                      "value": "PERCENT"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Line height",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "args": [
+            {
+              "type": "lineHeight",
+              "name": "lineheight",
+              "label": "Line Height",
+              "operator": "lineHeight",
+              "helper": "Set line height in percentages or pixels. Or just set it to auto.",
+              "required": true,
+              "args": [
+                {
+                  "type": "number",
+                  "name": "value",
+                  "label": "Value"
+                },
+                {
+                  "type": "select",
+                  "name": "unit",
+                  "label": "Pixels or percent",
+                  "options": [
+                    {
+                      "label": "Pixels",
+                      "value": "PIXELS"
+                    },
+                    {
+                      "label": "Percent",
+                      "value": "PERCENT"
+                    }
+                  ]
+                },
+                {
+                  "type": "boolean",
+                  "name": "unit",
+                  "label": "Auto"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Characters",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "args": [
+            {
+              "operator": "characters",
+              "type": "text",
+              "name": "value",
+              "label": "",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Insert characters",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "operator": "insertCharacters",
+          "args": [
+            {
+              "type": "number",
+              "name": "start",
+              "label": "Start",
+              "required": true
+            },
+            {
+              "type": "text",
+              "name": "characters",
+              "label": "Characters",
+              "required": true
+            },
+            {
+              "type": "select",
+              "name": "value",
+              "label": "Position",
+              "required": true,
+              "options": [
+                {
+                  "label": "Before",
+                  "value": "BEFORE"
+                },
+                {
+                  "label": "After",
+                  "value": "AFTER"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Delete characters",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "operator": "deleteCharacters",
+          "args": [
+            {
+              "type": "number",
+              "name": "start",
+              "label": "Start",
+              "required": true
+            },
+            {
+              "type": "number",
+              "name": "end",
+              "label": "End",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Font size range",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "operator": "setRangeFontSize",
+          "args": [
+            {
+              "type": "number",
+              "name": "start",
+              "label": "Start",
+              "required": true
+            },
+            {
+              "type": "number",
+              "name": "end",
+              "label": "End",
+              "required": true
+            },
+            {
+              "type": "number",
+              "name": "value",
+              "label": "Size",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Case range",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "operator": "setRangeTextCase",
+          "args": [
+            {
+              "type": "number",
+              "name": "start",
+              "label": "Start",
+              "required": true
+            },
+            {
+              "type": "number",
+              "name": "end",
+              "label": "End",
+              "required": true
+            },
+            {
+              "type": "select",
+              "name": "value",
+              "label": "Case",
+              "required": true,
+              "options": [
+                {
+                  "label": "Original",
+                  "value": "ORIGINAL"
+                },
+                {
+                  "label": "Uppercase",
+                  "value": "UPPER"
+                },
+                {
+                  "label": "Lowercase",
+                  "value": "LOWER"
+                },
+                {
+                  "label": "Title Case",
+                  "value": "TITLE"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Decorate range",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "operator": "setRangeTextDecoration",
+          "args": [
+            {
+              "type": "number",
+              "name": "start",
+              "label": "Start",
+              "message": "Should be a positive number or 0",
+              "required": true
+            },
+            {
+              "type": "number",
+              "name": "end",
+              "label": "End",
+              "message": "Should be a positive number",
+              "required": true
+            },
+            {
+              "type": "select",
+              "name": "value",
+              "label": "Decoration",
+              "required": true,
+              "options": [
+                {
+                  "label": "none",
+                  "value": "NONE"
+                },
+                {
+                  "label": "Underline",
+                  "value": "UNDERLINE"
+                },
+                {
+                  "label": "Strikethrough",
+                  "value": "STRIKETHROUGH"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Letter spacing range",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "operator": "setRangeLetterSpacing",
+          "args": [
+            {
+              "type": "setRangeLetterSpacing",
+              "name": "setRangeLetterSpacing",
+              "label": "Letter spacing range",
+              "helper": "Set letter spacing range in percentages or pixels.",
+              "required": true,
+              "args": [
+                {
+                  "type": "number",
+                  "name": "start",
+                  "label": "Start",
+                  "message": "Should be a positive number or 0",
+                  "required": true
+                },
+                {
+                  "type": "number",
+                  "name": "end",
+                  "label": "End",
+                  "message": "Should be a positive number",
+                  "required": true
+                },
+                {
+                  "type": "number",
+                  "name": "value.value",
+                  "label": "Value"
+                },
+                {
+                  "type": "select",
+                  "name": "value.unit",
+                  "label": "Pixels or percent",
+                  "options": [
+                    {
+                      "label": "Pixels",
+                      "value": "PIXELS"
+                    },
+                    {
+                      "label": "Percent",
+                      "value": "PERCENT"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Line height range",
+        "name": "TextNode",
+        "icon": "Text",
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "operator": "setRangeLineHeight",
+          "args": [
+            {
+              "type": "setRangeLineHeight",
+              "name": "setRangeLineHeight",
+              "label": "Line height range",
+              "helper": "Set line height range in percentages or pixels. Or just set it to auto.",
+              "required": true,
+              "args": [
+                {
+                  "type": "number",
+                  "name": "start",
+                  "label": "Start",
+                  "message": "Should be a positive number or 0",
+                  "required": true
+                },
+                {
+                  "type": "number",
+                  "name": "end",
+                  "label": "End",
+                  "message": "Should be a positive number",
+                  "required": true
+                },
+                {
+                  "type": "number",
+                  "name": "value.value",
+                  "label": "Value"
+                },
+                {
+                  "type": "boolean",
+                  "name": "value.unit",
+                  "label": "Auto"
+                },
+                {
+                  "type": "select",
+                  "name": "value.unit",
+                  "label": "Pixels or percent",
+                  "options": [
+                    {
+                      "label": "Pixels",
+                      "value": "PIXELS"
+                    },
+                    {
+                      "label": "Percent",
+                      "value": "PERCENT"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "List options range",
+        "name": "TextNode",
+        "icon": "Text",
+        "hidden": true,
+        "data": {
+          "loadFonts": true,
+          "api": "figma",
+          "operator": "setRangeListOptions",
+          "args": [
+            {
+              "type": "number",
+              "name": "start",
+              "label": "Start",
+              "message": "Should be a positive number or 0",
+              "required": true
+            },
+            {
+              "type": "number",
+              "name": "end",
+              "label": "End",
+              "message": "Should be a positive number",
+              "required": true
+            },
+            {
+              "type": "select",
+              "name": "value",
+              "label": "Value",
+              "required": true,
+              "options": [
+                {
+                  "label": "none",
+                  "value": "None"
+                },
+                {
+                  "label": "Ordered",
+                  "value": "ORDERED"
+                },
+                {
+                  "label": "Unordered",
+                  "value": "UNORDERED"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

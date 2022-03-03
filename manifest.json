@@ -1,0 +1,9 @@
+{
+  "name": "Figma Workflows",
+  "id": "1021090917104575891",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma"],
+  "enablePrivatePluginApi": true
+}

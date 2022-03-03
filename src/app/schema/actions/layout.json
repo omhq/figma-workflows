@@ -1,0 +1,500 @@
+[
+  {
+    "category": "Layout",
+    "items": [
+      {
+        "prettyName": "Set x position",
+        "name": "LayoutMixin",
+        "icon": "Group",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "x",
+              "type": "text",
+              "name": "value",
+              "label": "",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Set y position",
+        "name": "LayoutMixin",
+        "icon": "Group",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "y",
+              "type": "number",
+              "name": "value",
+              "label": "",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Set x & y position",
+        "name": "LayoutMixin",
+        "icon": "Group",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "x",
+              "type": "number",
+              "name": "x",
+              "label": "x",
+              "required": true
+            },
+            {
+              "operator": "y",
+              "type": "number",
+              "name": "y",
+              "label": "y",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Set rotation",
+        "name": "LayoutMixin",
+        "icon": "Angle",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "rotation",
+              "type": "number",
+              "name": "value",
+              "label": "Degrees",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Constrain proportions",
+        "name": "LayoutMixin",
+        "icon": "Group",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "constrainProportions",
+              "type": "boolean",
+              "name": "value",
+              "label": "",
+              "default": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Layout align",
+        "name": "LayoutMixin",
+        "icon": "Layout",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "layoutAlign",
+              "type": "select",
+              "name": "value",
+              "label": "Value",
+              "required": true,
+              "defaultValue": "MIN",
+              "options": [
+                {
+                  "label": "Min",
+                  "value": "MIN"
+                },
+                {
+                  "label": "Center",
+                  "value": "CENTER"
+                },
+                {
+                  "label": "Max",
+                  "value": "MAX"
+                },
+                {
+                  "label": "Stretch",
+                  "value": "STRETCH"
+                },
+                {
+                  "label": "Inherit",
+                  "value": "INHERIT"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Grow",
+        "name": "LayoutMixin",
+        "icon": "Group",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "layoutGrow",
+              "type": "number",
+              "name": "value",
+              "label": "",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Resize",
+        "name": "LayoutMixin",
+        "icon": "Group",
+        "data": {
+          "api": "figma",
+          "operator": "resize",
+          "args": [
+            {
+              "type": "number",
+              "name": "width",
+              "label": "Width",
+              "required": true
+            },
+            {
+              "type": "number",
+              "name": "height",
+              "label": "Height",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Resize without constraints",
+        "name": "LayoutMixin",
+        "icon": "Group",
+        "data": {
+          "api": "figma",
+          "operator": "resizeWithoutConstraints",
+          "args": [
+            {
+              "type": "number",
+              "name": "width",
+              "label": "Width",
+              "required": true
+            },
+            {
+              "type": "number",
+              "name": "height",
+              "label": "Height",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Rescale",
+        "helper": "Rescales the node.",
+        "name": "LayoutMixin",
+        "icon": "Group",
+        "data": {
+          "api": "figma",
+          "operator": "rescale",
+          "args": [
+            {
+              "type": "number",
+              "name": "value",
+              "label": "",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Overflow direction",
+        "name": "FrameNode",
+        "icon": "Frame",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "overflowDirection",
+              "type": "select",
+              "name": "value",
+              "label": "",
+              "required": true,
+              "options": [
+                {
+                  "label": "none",
+                  "value": "NONE"
+                },
+                {
+                  "label": "Horizontal",
+                  "value": "HORIZONTAL"
+                },
+                {
+                  "label": "Vertical",
+                  "value": "VERTICAL"
+                },
+                {
+                  "label": "Both",
+                  "value": "BOTH"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Fixed children",
+        "name": "FrameNode",
+        "icon": "Frame",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "numberOfFixedChildren",
+              "type": "number",
+              "name": "value",
+              "label": "",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Layout mode",
+        "name": "FrameNode",
+        "icon": "Layout",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "layoutMode",
+              "type": "select",
+              "name": "value",
+              "label": "",
+              "required": true,
+              "options": [
+                {
+                  "label": "None",
+                  "value": "NONE"
+                },
+                {
+                  "label": "Horizontal",
+                  "value": "HORIZONTAL"
+                },
+                {
+                  "label": "Vertical",
+                  "value": "VERTICAL"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Primary axis sizing mode",
+        "name": "FrameNode",
+        "icon": "Frame",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "primaryAxisSizingMode",
+              "type": "select",
+              "name": "value",
+              "label": "",
+              "required": true,
+              "options": [
+                {
+                  "label": "Fixed",
+                  "value": "FIXED"
+                },
+                {
+                  "label": "Auto",
+                  "value": "AUTO"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Counter axis sizing mode",
+        "name": "FrameNode",
+        "icon": "Frame",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "counterAxisSizingMode",
+              "type": "select",
+              "name": "value",
+              "label": "",
+              "required": true,
+              "options": [
+                {
+                  "label": "Fixed",
+                  "value": "FIXED"
+                },
+                {
+                  "label": "Auto",
+                  "value": "AUTO"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Primary axis align items",
+        "name": "FrameNode",
+        "icon": "Frame",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "primaryAxisAlignItems",
+              "type": "select",
+              "name": "value",
+              "label": "",
+              "required": true,
+              "options": [
+                {
+                  "label": "Min",
+                  "value": "MIN"
+                },
+                {
+                  "label": "Max",
+                  "value": "MAX"
+                },
+                {
+                  "label": "Center",
+                  "value": "CENTER"
+                },
+                {
+                  "label": "Space between",
+                  "value": "SPACE_BETWEEN"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Counter axis align items",
+        "name": "FrameNode",
+        "icon": "Frame",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "counterAxisAlignItems",
+              "type": "select",
+              "name": "value",
+              "label": "",
+              "required": true,
+              "options": [
+                {
+                  "label": "Min",
+                  "value": "MIN"
+                },
+                {
+                  "label": "Max",
+                  "value": "MAX"
+                },
+                {
+                  "label": "Center",
+                  "value": "CENTER"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Padding",
+        "name": "FrameNode",
+        "icon": "Padding",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "paddingLeft",
+              "type": "number",
+              "name": "paddingLeft",
+              "label": "Padding left",
+              "required": false,
+              "defaultValue": ""
+            },
+            {
+              "operator": "paddingRight",
+              "type": "number",
+              "name": "paddingRight",
+              "label": "Padding right",
+              "required": false,
+              "defaultValue": ""
+            },
+            {
+              "operator": "paddingTop",
+              "type": "number",
+              "name": "paddingTop",
+              "label": "Padding top",
+              "required": false,
+              "defaultValue": ""
+            },
+            {
+              "operator": "paddingBottom",
+              "type": "number",
+              "name": "paddingBottom",
+              "label": "Padding bottom",
+              "required": false,
+              "defaultValue": ""
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Item spacing",
+        "helper": "Applicable only on auto-layout frames. Determines distance between children of the frame.",
+        "name": "FrameNode",
+        "icon": "Spacing",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "itemSpacing",
+              "type": "number",
+              "name": "value",
+              "label": "",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "prettyName": "Clip content",
+        "name": "FrameNode",
+        "icon": "Rectangle",
+        "data": {
+          "api": "figma",
+          "args": [
+            {
+              "operator": "clipsContent",
+              "type": "boolean",
+              "name": "value",
+              "label": "",
+              "default": true
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
