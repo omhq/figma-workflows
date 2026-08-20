@@ -32,7 +32,9 @@ import { setTimer } from '../../../plugin/utils'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
+  cloneNodeTree,
   dedupeNodeTree,
+  finalizeNodeDrop,
   mergeRootNodesWithLatestChildren,
   replaceNodeChildren
 } from '../../utils/state-actions'
@@ -42,18 +44,22 @@ const sortableOptions = {
   animation: 150,
   fallbackOnBody: true,
   fallbackTolerance: 5,
-  emptyInsertThreshold: 2,
+  emptyInsertThreshold: 14,
   swapThreshold: 1,
   ghostClass: 'ghost',
   group: 'shared',
   dragClass: 'sortable-drag',
-  choseClass: 'sortable-chosen',
+  chosenClass: 'sortable-chosen',
   filter: '.disabled',
   forceFallback: true,
   removeCloneOnHide: true,
   handle: '.drag-handle',
   onMove: function (evt) {
-    return evt.related.className.indexOf('disabled') === -1
+    if (evt.dragged?.contains(evt.to) || evt.dragged?.contains(evt.related)) {
+      return false
+    }
+
+    return !evt.related?.classList.contains('disabled')
   },
   onChoose: function (evt) {
     const origEl = evt.item
@@ -85,10 +91,13 @@ function Container({
   workflowAdded,
   onRemove,
   onArgsChange,
+  onStartCallback,
   onEndCallback,
   onOpenNode,
   openedNodeById
 }) {
+  const hasActions = block.children?.some(child => child.name !== 'Start')
+
   return (
     <>
       <ReactSortable
@@ -99,11 +108,12 @@ function Container({
             replaceNodeChildren(sourceList, block.id, currentList)
           )
         }}
+        onStart={onStartCallback}
         onEnd={onEndCallback}
         {...sortableOptions}
-        className={`
-          ${block.children && block.children.length ? 'pb-2' : ' emptyChildren bg-gray-100 rounded-md'}
-        `}
+        className={`workflow-drop-list workflow-drop-list--nested pb-2 ${
+          hasActions ? 'has-actions' : 'is-empty'
+        }`}
       >
         {block.children &&
           block.children.map((childBlock, index) => {
@@ -117,6 +127,7 @@ function Container({
                 workflowAdded={workflowAdded}
                 onRemove={onRemove}
                 onArgsChange={onArgsChange}
+                onStartCallback={onStartCallback}
                 onEndCallback={onEndCallback}
                 onOpenNode={onOpenNode}
                 openedNodeById={openedNodeById}
@@ -136,6 +147,7 @@ function BlockWrapper({
   workflowAdded,
   onRemove,
   onArgsChange,
+  onStartCallback,
   onEndCallback,
   onOpenNode,
   openedNodeById
@@ -144,7 +156,12 @@ function BlockWrapper({
   if (block.type === 'container') {
     return (
       <div
-        className={block.name === 'Start' ? 'block disabled hidden' : 'block'}
+        className={
+          block.name === 'Start'
+            ? 'workflow-node-shell block disabled hidden'
+            : 'workflow-node-shell block'
+        }
+        data-node-id={block.id}
       >
         <Node
           index={blockIndex}
@@ -156,7 +173,7 @@ function BlockWrapper({
           onOpenNode={onOpenNode}
           openedNodeById={openedNodeById}
         />
-        <div className={`pl-3 relative block`}>
+        <div className="workflow-nest pl-3 relative block">
           <Container
             block={block}
             setBlocks={setBlocks}
@@ -165,6 +182,7 @@ function BlockWrapper({
             workflowAdded={workflowAdded}
             onRemove={onRemove}
             onArgsChange={onArgsChange}
+            onStartCallback={onStartCallback}
             onEndCallback={onEndCallback}
             onOpenNode={onOpenNode}
             openedNodeById={openedNodeById}
@@ -175,7 +193,12 @@ function BlockWrapper({
   } else {
     return (
       <div
-        className={block.name === 'Start' ? 'block disabled hidden' : 'block'}
+        className={
+          block.name === 'Start'
+            ? 'workflow-node-shell block disabled hidden'
+            : 'workflow-node-shell block'
+        }
+        data-node-id={block.id}
       >
         <Node
           index={blockIndex}
@@ -199,7 +222,10 @@ const Shortcut = ({ state, dispatch }) => {
   const scrollable = useRef<HTMLDivElement>(null)
   const scrollableInner = useRef<HTMLDivElement>(null)
   const [nodes, setNodes] = useState<any[]>([])
+  const [isDragging, setIsDragging] = useState(false)
   const nodesRef = useRef<any[]>([])
+  const dragSnapshotRef = useRef<any[] | null>(null)
+  const draggedNodeIdRef = useRef<string | null>(null)
 
   const updateNodes = useCallback(nextNodes => {
     const next =
@@ -319,19 +345,42 @@ const Shortcut = ({ state, dispatch }) => {
     dispatch(saveShortcut())
   }
 
-  const handleSortEnd = () => {
-    const latestNodes = dedupeNodeTree(nodesRef.current)
+  const handleSortStart = event => {
+    dragSnapshotRef.current = cloneNodeTree(nodesRef.current)
+    draggedNodeIdRef.current = event.item?.dataset?.nodeId || null
+    setIsDragging(true)
+  }
 
-    if (latestNodes.length) {
-      nodesRef.current = latestNodes
-      setNodes(latestNodes)
+  const handleSortEnd = () => {
+    const snapshot = dragSnapshotRef.current
+    if (!snapshot) return
+
+    const result = finalizeNodeDrop(
+      nodesRef.current,
+      snapshot,
+      draggedNodeIdRef.current
+    )
+    const latestNodes = result.nodes
+
+    nodesRef.current = latestNodes
+    setNodes(latestNodes)
+
+    if (result.accepted && latestNodes.length) {
       dispatch(updateAction({ nodes: latestNodes }))
       dispatch(saveShortcut())
     }
+
+    dragSnapshotRef.current = null
+    draggedNodeIdRef.current = null
+    setIsDragging(false)
   }
 
   return (
-    <div className="flex flex-col h-screen justify-between">
+    <div
+      className={`workflow-builder flex flex-col h-screen justify-between ${
+        isDragging ? 'is-dragging' : ''
+      }`}
+    >
       <div className="w-full px-3 py-2 border-b bg-white sticky z-50 top-0">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-between">
@@ -484,9 +533,14 @@ const Shortcut = ({ state, dispatch }) => {
           <ReactSortable
             list={nodes}
             setList={updateRootNodes}
+            onStart={handleSortStart}
             onEnd={handleSortEnd}
             {...sortableOptions}
-            className="pb-4"
+            className={`workflow-drop-list workflow-drop-list--root pb-4 ${
+              nodes.some(node => node.name !== 'Start')
+                ? 'has-actions'
+                : 'is-empty'
+            }`}
           >
             {nodes.map((block, blockIndex) => (
               <BlockWrapper
@@ -504,6 +558,7 @@ const Shortcut = ({ state, dispatch }) => {
                   dispatch(editArgsShortcut(values))
                   dispatch(saveShortcut())
                 }}
+                onStartCallback={handleSortStart}
                 onEndCallback={handleSortEnd}
                 openedNodeById={openedNodeById}
                 onOpenNode={id => dispatch(openNodeToggle({ id }))}

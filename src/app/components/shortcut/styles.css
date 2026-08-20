@@ -10,27 +10,110 @@
   background: none;
 }
 
+.workflow-builder.is-dragging .sortable-chosen:not(.sortable-drag) {
+  opacity: 0.45;
+}
+
 .sortable-drag {
-  background: none;
+  background: transparent;
   padding: 0;
+  scale: 0.94 1;
+  transform-origin: center;
 }
 
-.ghost {
-  padding: 2px 0;
-  background: #f3f4f6;
-  border-radius: 10px;
+.sortable-drag > [data-dnd-show='true'] > div {
+  background: white;
+  border-radius: 8px;
+  box-shadow:
+    0 12px 24px rgb(15 23 42 / 0.14),
+    0 3px 8px rgb(15 23 42 / 0.1);
 }
 
-.sortable-drag .emptyChildren:before,
-.ghost .emptyChildren:before {
+.workflow-drop-list {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition:
+    min-height 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease,
+    padding 140ms ease;
+}
+
+.workflow-drop-list--nested {
+  min-height: 8px;
+}
+
+.workflow-nest {
+  border-left: 1px solid #e5e7eb;
+  transition: border-color 140ms ease;
+}
+
+.workflow-builder.is-dragging .workflow-nest {
+  border-left-color: #c7d2fe;
+}
+
+.workflow-builder.is-dragging .workflow-drop-list {
+  border-color: #c7d2fe;
+  background: rgb(238 242 255 / 0.45);
+  min-height: 40px;
+  padding: 4px;
+}
+
+.workflow-builder.is-dragging .workflow-drop-list--root {
+  border-color: #e0e7ff;
+}
+
+.workflow-drop-list.is-empty::before {
   content: '';
-  padding: 0;
+  display: block;
+  height: 26px;
+  border: 1px dashed #d1d5db;
+  border-radius: 7px;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgb(249 250 251 / 0.9),
+    rgb(249 250 251 / 0.9) 6px,
+    rgb(243 244 246 / 0.9) 6px,
+    rgb(243 244 246 / 0.9) 12px
+  );
+  transition:
+    height 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease;
 }
 
-.emptyChildren:before {
-  content: 'drop actions here to nest';
-  padding: 6px 10px;
-  font-size: 13px;
-  display: block;
-  color: #777;
+.workflow-builder.is-dragging .workflow-drop-list.is-empty::before {
+  height: 38px;
+  border: 2px dashed #818cf8;
+  background: rgb(238 242 255 / 0.9);
+}
+
+.workflow-builder.is-dragging
+  .workflow-drop-list.is-empty:has(> .ghost)::before {
+  display: none;
+}
+
+.workflow-builder .ghost {
+  box-sizing: border-box;
+  min-height: 42px !important;
+  max-height: 46px;
+  margin: 3px 0;
+  padding: 0 !important;
+  overflow: hidden;
+  border: 2px dashed #6366f1 !important;
+  border-radius: 8px !important;
+  background: rgb(238 242 255 / 0.95) !important;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.7);
+  opacity: 1 !important;
+}
+
+.workflow-builder .ghost > * {
+  visibility: hidden;
+}
+
+.workflow-builder.is-dragging .workflow-node-shell {
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
 }

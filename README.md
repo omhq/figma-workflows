@@ -34,11 +34,14 @@ UI and controller watchers.
 
 ```bash
 npm run build         # production bundle
+npm test              # workflow regression tests
 npm run typecheck     # TypeScript validation
 npm run lint          # ESLint validation
+npm run format        # format the entire project with Prettier
 npm run format:check  # Prettier validation
-npm run check         # typecheck, lint, and production build
+npm run check         # tests, typecheck, lint, and production build
 ```
 
-The workflow runner remains on Rete 1.x because Rete 2 uses a different engine
-architecture and is not a drop-in dependency upgrade.
+Workflow execution uses the plugin's internal typed graph engine. Existing
+saved workflows remain compatible and no external workflow-engine dependency
+is required.

@@ -48,11 +48,10 @@ const nodeLabel = (node: WorkflowNode) =>
   node.prettyName ? `${node.prettyName} (${node.name})` : node.name
 
 /**
- * Executes the persisted Rete v1 graph format without Rete's legacy runtime.
+ * Executes the persisted workflow graph format.
  *
- * The old engine swallowed an upstream worker exception and then invoked the
- * next worker with an undefined input. This executor resolves dependencies
- * first and stops immediately with the action that actually failed.
+ * Resolves dependencies first and stops immediately
+ * with the action that actually failed.
  */
 export class WorkflowEngine {
   private readonly components = new Map<string, WorkflowComponent>()

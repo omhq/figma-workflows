@@ -37,28 +37,61 @@ export const removeNode = (nodes, id) => {
   return toArray.filter(node => node.id !== id)
 }
 
+const indexNodeTree = nodes => {
+  const byId = new Map<string, any>()
+
+  const visit = currentNodes => {
+    for (const node of Object.values(currentNodes || {}) as any[]) {
+      byId.set(String(node.id), node)
+      visit(node.children || [])
+    }
+  }
+
+  visit(nodes)
+
+  return byId
+}
+
 /**
  * Replace a container's children by stable node ID. Sortable indexes become
  * stale when an item is removed from a list before it is added to a nested one.
  */
 export const replaceNodeChildren = (nodes, nodeId, children) => {
-  return (Object.values(nodes || {}) as any[]).map(node => {
-    if (node.id === nodeId) {
-      return {
-        ...node,
-        children
-      }
-    }
+  const latestById = indexNodeTree(nodes)
+  const childrenWithLatestDescendants = (
+    Object.values(children || {}) as any[]
+  ).map(node => {
+    const latest = latestById.get(String(node.id))
 
-    if (node.children && Object.keys(node.children).length) {
-      return {
-        ...node,
-        children: replaceNodeChildren(node.children, nodeId, children)
-      }
-    }
-
-    return node
+    return latest
+      ? {
+          ...node,
+          children: latest.children || []
+        }
+      : node
   })
+
+  const visit = currentNodes => {
+    return (Object.values(currentNodes || {}) as any[]).map(node => {
+      if (node.id === nodeId) {
+        return {
+          ...node,
+          children: childrenWithLatestDescendants
+        }
+      }
+
+      if (node.children && Object.keys(node.children).length) {
+        return {
+          ...node,
+          children: visit(node.children)
+        }
+      }
+
+      return node
+    })
+  }
+
+  return visit(nodes)
 }
 
 /**
@@ -114,6 +147,64 @@ export const dedupeNodeTree = nodes => {
   }
 
   return visit(nodes)
+}
+
+export const cloneNodeTree = nodes => {
+  return (Object.values(nodes || {}) as any[]).map(node => ({
+    ...node,
+    children: cloneNodeTree(node.children || [])
+  }))
+}
+
+export const inspectNodeTree = nodes => {
+  const occurrences = new Map<string, number>()
+  let cyclic = false
+
+  const visit = (currentNodes, ancestors: Set<any>) => {
+    for (const node of Object.values(currentNodes || {}) as any[]) {
+      if (ancestors.has(node)) {
+        cyclic = true
+        continue
+      }
+
+      const id = String(node.id)
+      occurrences.set(id, (occurrences.get(id) || 0) + 1)
+
+      const nextAncestors = new Set(ancestors)
+      nextAncestors.add(node)
+      visit(node.children || [], nextAncestors)
+    }
+  }
+
+  visit(nodes, new Set())
+
+  return {
+    cyclic,
+    occurrences
+  }
+}
+
+/**
+ * Complete a drag transaction without ever losing its source action. Duplicate
+ * source/destination reports are safe; missing or cyclic results roll back.
+ */
+export const finalizeNodeDrop = (nodes, snapshot, draggedNodeId) => {
+  const inspection = inspectNodeTree(nodes)
+  const draggedNodeOccurrences = draggedNodeId
+    ? inspection.occurrences.get(String(draggedNodeId)) || 0
+    : 1
+
+  if (inspection.cyclic || draggedNodeOccurrences === 0) {
+    return {
+      accepted: false,
+      nodes: cloneNodeTree(snapshot)
+    }
+  }
+
+  return {
+    accepted: true,
+    nodes: dedupeNodeTree(nodes)
+  }
 }
 
 /**

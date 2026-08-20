@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { getIconComponent } from '../../utils/icons'
 import ActionArgsForm from '../action-args-form'
-import { CircleX, SlidersHorizontal } from 'lucide-react'
+import { CircleX, GripVertical, SlidersHorizontal } from 'lucide-react'
 
 const Node = ({
   index,
@@ -21,7 +21,11 @@ const Node = ({
     <>
       <div data-dnd-show={false} className="w-full px-3">
         <div className="p-2 my-1 hover:shadow-md border rounded-md border-gray-300 hover:border-indigo-500">
-          <span className="flex items-center text-xs font-medium w-full drag-handle cursor-move ml-1">
+          <span className="flex items-center text-xs font-medium w-full drag-handle cursor-grab active:cursor-grabbing">
+            <GripVertical
+              aria-hidden="true"
+              className="mr-1 size-3.5 shrink-0 text-gray-400"
+            />
             {node.prettyName}
           </span>
         </div>
@@ -47,7 +51,11 @@ const Node = ({
           <div
             className={`p-2 flex items-center justify-between ${opened ? 'border-b' : ''}`}
           >
-            <span className="flex items-center text-xs font-medium w-full drag-handle cursor-move">
+            <span className="flex items-center text-xs font-medium w-full drag-handle cursor-grab active:cursor-grabbing">
+              <GripVertical
+                aria-hidden="true"
+                className="mr-1 size-3.5 shrink-0 text-gray-400"
+              />
               {IconComponent && (
                 <IconComponent
                   type={node.icon}
