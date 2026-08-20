@@ -1,8 +1,8 @@
-[data-dnd-hide="true"] {
+[data-dnd-hide='true'] {
   display: none;
 }
 
-[data-dnd-show="false"] {
+[data-dnd-show='false'] {
   display: none;
 }
 
@@ -17,18 +17,18 @@
 
 .ghost {
   padding: 2px 0;
-  background: #F3F4F6;
+  background: #f3f4f6;
   border-radius: 10px;
 }
 
 .sortable-drag .emptyChildren:before,
 .ghost .emptyChildren:before {
-  content: "";
+  content: '';
   padding: 0;
 }
 
 .emptyChildren:before {
-  content: "drop actions here to nest";
+  content: 'drop actions here to nest';
   padding: 6px 10px;
   font-size: 13px;
   display: block;

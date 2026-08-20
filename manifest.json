@@ -5,5 +5,9 @@
   "main": "dist/code.js",
   "ui": "dist/ui.html",
   "editorType": ["figma"],
-  "enablePrivatePluginApi": true
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": ["*"],
+    "reasoning": "Workflows can send HTTP GET requests to user-configured endpoints."
+  }
 }
