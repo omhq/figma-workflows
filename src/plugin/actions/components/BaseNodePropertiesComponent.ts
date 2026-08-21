@@ -5,6 +5,7 @@ import {
   generateErrorMessage,
   parseExpression
 } from '../../utils'
+import { evaluateConditionGroup } from '../../../shared/conditions'
 
 class BaseNodePropertiesComponent extends WorkflowComponent {
   constructor() {
@@ -156,98 +157,27 @@ class BaseNodePropertiesComponent extends WorkflowComponent {
 
       if (operator === 'if') {
         const fnode = operateOn
-        const normalizedConditioalIf = normalizeArgs(
-          args,
-          argDefinitions,
-          isFunction
-        )[0]
+        const conditionData = args?.[0]
 
-        if (normalizedConditioalIf) {
-          const conditioalIfProperty = normalizedConditioalIf.property
-          const conditioalIfOperator = normalizedConditioalIf.operator
-          const conditioalIfValue = normalizedConditioalIf.value
-          let okToRun = false
+        try {
+          const okToRun = await evaluateConditionGroup(conditionData, value =>
+            typeof value === 'string'
+              ? parseExpression(fnode, env, value)
+              : Promise.resolve(value)
+          )
 
-          function loop(conditioalIfProperty, conditioalIfValue) {
-            const normalizedValues = []
-            return new Promise(resolve => {
-              for (const value of [conditioalIfProperty, conditioalIfValue]) {
-                parseExpression(fnode, env, value)
-                  .then(ret => {
-                    if (ret !== null) {
-                      normalizedValues.push(ret)
-                    }
-                  })
-                  .catch(e => {
-                    publishWorkflowMessage(
-                      2,
-                      generateErrorMessage(e.message, operateOn)
-                    )
-                  })
-              }
-
-              resolve(normalizedValues)
+          if (okToRun) {
+            publishWorkflowMData({
+              output: {
+                operateOn: fnode,
+                env: { ...env }
+              },
+              children
             })
           }
-
-          loop(conditioalIfProperty, conditioalIfValue).then(
-            normalizedValues => {
-              switch (conditioalIfOperator) {
-                case 'equal':
-                  if (normalizedValues[0] == normalizedValues[1]) {
-                    okToRun = true
-                  }
-                  break
-                case 'not-equal':
-                  if (normalizedValues[0] != normalizedValues[1]) {
-                    okToRun = true
-                  }
-                  break
-                case 'strict-equal':
-                  if (normalizedValues[0] === normalizedValues[1]) {
-                    okToRun = true
-                  }
-                  break
-                case 'strict-not-equal':
-                  if (normalizedValues[0] !== normalizedValues[1]) {
-                    okToRun = true
-                  }
-                  break
-                case 'greater-than':
-                  if (normalizedValues[0] > normalizedValues[1]) {
-                    okToRun = true
-                  }
-                  break
-                case 'greater-than-or-equal':
-                  if (normalizedValues[0] >= normalizedValues[1]) {
-                    okToRun = true
-                  }
-                  break
-                case 'less-than':
-                  if (normalizedValues[0] < normalizedValues[1]) {
-                    okToRun = true
-                  }
-                  break
-                case 'less-than-or-equal':
-                  if (normalizedValues[0] <= normalizedValues[1]) {
-                    okToRun = true
-                  }
-                  break
-                default:
-                  break
-              }
-
-              if (okToRun) {
-                publishWorkflowMData({
-                  output: {
-                    operateOn: fnode,
-                    env: { ...env }
-                  },
-                  children
-                })
-              }
-            }
-          )
+        } catch (e) {
+          const message = e instanceof Error ? e.message : String(e)
+          publishWorkflowMessage(2, generateErrorMessage(message, operateOn))
         }
       }
 

@@ -21,7 +21,7 @@
               "type": "if",
               "name": "if",
               "label": "If",
-              "helper": "",
+              "helper": "Choose layer properties and combine conditions with AND, OR, and NOT.",
               "required": true,
               "args": [
                 {
