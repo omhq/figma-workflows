@@ -10,6 +10,8 @@ import {
 } from './engine'
 import PluginStartComponent from './components/StartComponent'
 import BlendMixinComponent from './components/BlendMixinComponent'
+import CornerMixinComponent from './components/CornerMixinComponent'
+import StarNodeComponent from './components/StarNodeComponent'
 
 class StartComponent extends WorkflowComponent {
   constructor() {
@@ -84,6 +86,49 @@ test('processes the simple Start to BlendMixin workflow that previously crashed'
   engine.register(new BlendMixinComponent())
 
   await assert.doesNotReject(engine.process(workflow))
+})
+
+test('fractional numeric values update smoothing, opacity, and inner radius before the next action', async () => {
+  for (const [component, property] of [
+    [new CornerMixinComponent(), 'cornerSmoothing'],
+    [new BlendMixinComponent(), 'opacity'],
+    [new StarNodeComponent(), 'innerRadius']
+  ] as const) {
+    const target = { type: 'STAR', [property]: 0 }
+    class TargetStart extends WorkflowComponent {
+      constructor() {
+        super('Start')
+      }
+      worker(_node, _inputs, outputs) {
+        outputs.output = { input: { operateOn: target, env: {} } }
+      }
+    }
+    class Verify extends WorkflowComponent {
+      constructor() {
+        super('Verify')
+      }
+      worker() {
+        assert.equal(target[property], 0.6)
+      }
+    }
+    const workflow = validWorkflow()
+    workflow.nodes['2'].name = component.name
+    workflow.nodes['2'].data = {
+      api: 'figma',
+      args: ['60/100'],
+      argDefinitions: [{ operator: property, type: 'number' }]
+    }
+    workflow.nodes['3'] = {
+      id: 3,
+      name: 'Verify',
+      inputs: { input: { connections: [{ node: 2, output: 'output' }] } }
+    }
+    const engine = new WorkflowEngine()
+    engine.register(new TargetStart())
+    engine.register(component)
+    engine.register(new Verify())
+    await engine.process(workflow)
+  }
 })
 
 test('does not invoke a downstream action after its upstream worker fails', async () => {

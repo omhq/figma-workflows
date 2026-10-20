@@ -1,4 +1,5 @@
 import { getPath, setPath } from '../shared/object'
+import { normalizeNumberArgument } from './numeric-args'
 
 /**
  * Checks if a string can be parsed into an object.
@@ -192,15 +193,7 @@ export const normalizeArgs = (args, argDefinitions, isFunction) => {
     // Default case handles custom json string that a custom components return.
     switch (argDefinition.type) {
       case 'number':
-        if (isFloat(value)) {
-          value = parseFloat(value)
-          normalizedArgs.splice(i, 0, value)
-        }
-
-        if (isInt(value)) {
-          value = parseInt(value, 10)
-          normalizedArgs.splice(i, 0, value)
-        }
+        normalizedArgs.splice(i, 0, normalizeNumberArgument(value))
         break
       case 'boolean':
       case 'select':

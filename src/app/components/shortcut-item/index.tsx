@@ -123,6 +123,7 @@ const ShortcutItem = ({
                     className="h-6 w-full justify-start px-2 text-red-400 hover:bg-white/10 hover:text-red-300"
                     onClick={e => {
                       e.stopPropagation()
+                      setShowDropdown(false)
                       setShowDeleteModal(true)
                     }}
                   >
@@ -165,7 +166,7 @@ const ShortcutItem = ({
               &#8203;
             </span>
             <div
-              className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
+              className="relative z-10 inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
               role="dialog"
               aria-modal="true"
               aria-labelledby="modal-headline"

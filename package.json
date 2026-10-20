@@ -13,7 +13,7 @@
     "dev:ui": "vite build --watch --mode development",
     "dev:controller": "vite build --watch --mode development --config vite.controller.config.ts",
     "start": "npm run dev",
-    "test": "node --import tsx --test src/**/*.test.ts",
+    "test": "node scripts/test.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",

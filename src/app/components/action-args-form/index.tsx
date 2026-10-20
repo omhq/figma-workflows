@@ -8,6 +8,7 @@ import LineHeightRangeComponent from './LineHeightRangeComponent'
 import LetterSpacingComponent from './LetterSpacingComponent'
 import IfComponent from './IfComponent'
 import LetterSpacingRangeComponent from '../action-args-form/LetterSpacingRangeComponent'
+import EffectComponent from './EffectComponent'
 
 const ActionArgsForm = ({ node, onChange, dndHide, opened }) => {
   const fields = node.data.argDefinitions
@@ -49,6 +50,16 @@ const ActionArgsForm = ({ node, onChange, dndHide, opened }) => {
       {fields.map(field => {
         const { type, name, label, options, message } = field
         const value = getPath(formik.values, name)
+
+        if (type === 'effect') {
+          return (
+            <EffectComponent
+              key={name}
+              value={value}
+              onChange={value => handleChange(name, value)}
+            />
+          )
+        }
 
         if (type === 'httprequest') {
           return (

@@ -17,6 +17,7 @@ import StartComponent from './components/StartComponent'
 import TextNodeComponent from './components/TextNodeComponent'
 import VectorNodeComponent from './components/VectorNodeComponent'
 import CodeComponent from './components/CodeComponent'
+import EffectsComponent from './components/EffectsComponent'
 import { WORKFLOW_RUN_COMPLETE } from '../../plugin/actions/data'
 import { publishWorkflowMessage } from './workflow'
 
@@ -71,6 +72,10 @@ export default async function run(runData, runContext) {
 
       case 'EllipseNode':
         components.push(new EllipseNodeComponent())
+        break
+
+      case 'Effects':
+        components.push(new EffectsComponent())
         break
 
       case 'FrameNode':
